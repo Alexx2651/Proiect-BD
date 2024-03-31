@@ -1,0 +1,107 @@
+---------POPULARE MASINI-------
+-- Inserare 5 înregistrări în tabela Masini
+INSERT INTO Masini (marca, model, culoare, pret, an_fabricatie, kilometraj)
+VALUES ('Toyota', 'Corolla', 'alb', 25000, 2020, '50000 km');
+
+INSERT INTO Masini (marca, model, culoare, pret, an_fabricatie, kilometraj)
+VALUES ('Ford', 'Focus', 'albastru', 20000, 2019, '40000 km');
+
+INSERT INTO Masini (marca, model, culoare, pret, an_fabricatie, kilometraj)
+VALUES ('Honda', 'Civic', 'rosu', 22000, 2021, '30000 km');
+
+INSERT INTO Masini (marca, model, culoare, pret, an_fabricatie, kilometraj)
+VALUES ('Chevrolet', 'Malibu', 'negru', 28000, 2018, '60000 km');
+
+INSERT INTO Masini (marca, model, culoare, pret, an_fabricatie, kilometraj)
+VALUES ('Volkswagen', 'Golf', 'verde', 23000, 2022, '10000 km');
+
+------SCRIPT CREEARE MASINI-----
+CREATE TABLE Masini (
+    marca VARCHAR2(20),
+    model VARCHAR2(20),
+    culoare VARCHAR2(10),
+    pret NUMBER(15),
+    an_fabricatie NUMBER(10),
+    kilometraj VARCHAR2(10)
+);
+
+
+-- Crearea tabelei "locatii"
+CREATE TABLE locatii (
+    oras VARCHAR2(20),
+    strada VARCHAR2(20),
+    email VARCHAR2(20),
+    numar_telefon VARCHAR2(20),
+    program VARCHAR2(20),
+    CONSTRAINT chk_telefon CHECK (REGEXP_LIKE(numar_telefon, '^07\d{8}$')), -- Constraint pentru numarul de telefon
+    CONSTRAINT chk_email CHECK (REGEXP_LIKE(email, '^[^@]+@[^@]+\.[a-zA-Z]{2,}$') AND LENGTH(REGEXP_SUBSTR(email, '@', 1, 1)) = 1), -- Constraint pentru email
+    CONSTRAINT chk_oras CHECK (REGEXP_LIKE(oras, '^[a-zA-Z-]+$')) -- Constraint pentru oras
+);
+
+-- Adăugarea înregistrărilor în tabela "locatii"
+INSERT INTO locatii (oras, strada, email, numar_telefon, program) VALUES
+    ('Bucuresti', 'Strada Victoriei', 'contact@locatie1.com', '0723456789', 'Luni-Vineri 9:00-18:00');
+
+INSERT INTO locatii (oras, strada, email, numar_telefon, program) VALUES
+    ('Cluj-Napoca', 'Strada Avram Iancu', 'contact@locatie2.com', '0741122334', 'Luni-Sambata 10:00-20:00');
+
+INSERT INTO locatii (oras, strada, email, numar_telefon, program) VALUES
+    ('Timisoara', 'Strada Republicii', 'contact@locatie3.com', '0729876543', 'Luni-Duminica 8:00-22:00');
+
+INSERT INTO locatii (oras, strada, email, numar_telefon, program) VALUES
+    ('Iasi', 'Strada Palat', 'contact@locatie4.com', '0712345678', 'Luni-Vineri 9:30-17:30');
+
+INSERT INTO locatii (oras, strada, email, numar_telefon, program) VALUES
+    ('Brasov', 'Strada Council Square', 'contact@locatie5.com', '0733333333', 'Luni-Duminica 7:00-21:00');
+
+
+-----POPULARE INCHIRIERI----
+INSERT INTO inchirieri (marca, model, an_fabricatie, pret_zi, locatie) VALUES
+    ('Ferrari', '488 GTB', 2019, 450, 'Bucuresti');
+
+INSERT INTO inchirieri (marca, model, an_fabricatie, pret_zi, locatie) VALUES
+    ('Lamborghini', 'Huracan', 2020, 500, 'Cluj-Napoca');
+
+INSERT INTO inchirieri (marca, model, an_fabricatie, pret_zi, locatie) VALUES
+    ('Porsche', '911 Turbo S', 2018, 400, 'Timisoara');
+
+INSERT INTO inchirieri (marca, model, an_fabricatie, pret_zi, locatie) VALUES
+    ('Aston Martin', 'DB11', 2021, 480, 'Iasi');
+
+INSERT INTO inchirieri (marca, model, an_fabricatie, pret_zi, locatie) VALUES
+    ('Maserati', 'GranTurismo', 2017, 350, 'Brasov');
+
+
+---------TABELA INCHIRIERI----------
+CREATE TABLE inchirieri (
+    marca VARCHAR2(20),
+    model VARCHAR2(20),
+    an_fabricatie NUMBER(5),
+    pret_zi NUMBER(6),
+    locatie VARCHAR2(20)
+);
+
+
+---------TABELA ISTORIC_INCHIRIERI-------
+
+CREATE TABLE Istoric_inchirieri (
+    nume VARCHAR2(20),
+    prenume VARCHAR2(20),
+    marca VARCHAR2(20),
+    model VARCHAR2(20),
+    an_fabricatie NUMBER(5),
+    pret NUMBER(6),
+    locatie VARCHAR2(20)
+);
+
+
+----TABELA INREGISTRARI-----
+
+CREATE TABLE Inregistrari(
+    id NUMBER PRIMARY KEY,
+    nume VARCHAR2(20),
+    prenume VARCHAR2(20),
+    numar_telefon VARCHAR2(10) CHECK (REGEXP_LIKE(numar_telefon, '^07[0-9]{8}$')),
+    cnp VARCHAR2(13) CHECK (LENGTH(cnp) = 13)
+);
+
